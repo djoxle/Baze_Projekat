@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="Kasas">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Kasa)">
+        <MappingFragment StoreEntitySet="Kasas">
+          <ScalarProperty Name="Idk" ColumnName="Idk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Racuns">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Racun)">
+        <MappingFragment StoreEntitySet="Racuns">
+          <ScalarProperty Name="Idr" ColumnName="Idr" />
+          <ScalarProperty Name="KasaIdk" ColumnName="KasaIdk" />
+          <ScalarProperty Name="ZaposleniSifzap" ColumnName="ZaposleniSifzap" />
+          <ScalarProperty Name="Datumr" ColumnName="Datumr" />
+          <ScalarProperty Name="Ukupno" ColumnName="Ukupno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zaposlenis">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Zaposleni)">
+        <MappingFragment StoreEntitySet="Zaposlenis">
+          <ScalarProperty Name="Sifzap" ColumnName="Sifzap" />
+          <ScalarProperty Name="ImeZap" ColumnName="ImeZap" />
+          <ScalarProperty Name="PrzZap" ColumnName="PrzZap" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Konobar)">
+        <MappingFragment StoreEntitySet="Zaposlenis_Konobar">
+          <ScalarProperty Name="Sifzap" ColumnName="Sifzap" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Sanker)">
+        <MappingFragment StoreEntitySet="Zaposlenis_Sanker">
+          <ScalarProperty Name="Sifzap" ColumnName="Sifzap" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Salas">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Sala)">
+        <MappingFragment StoreEntitySet="Salas">
+          <ScalarProperty Name="RedBrSale" ColumnName="RedBrSale" />
+          <ScalarProperty Name="Sprat" ColumnName="Sprat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Proizvods">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Proizvod)">
+        <MappingFragment StoreEntitySet="Proizvods">
+          <ScalarProperty Name="Kodpr" ColumnName="Kodpr" />
+          <ScalarProperty Name="Nazpr" ColumnName="Nazpr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cenovniks">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Cenovnik)">
+        <MappingFragment StoreEntitySet="Cenovniks">
+          <ScalarProperty Name="Cenap" ColumnName="Cenap" />
+          <ScalarProperty Name="ProizvodKodpr" ColumnName="ProizvodKodpr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stavkas">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Stavka)">
+        <MappingFragment StoreEntitySet="Stavkas">
+          <ScalarProperty Name="Rbst" ColumnName="Rbst" />
+          <ScalarProperty Name="Kol" ColumnName="Kol" />
+          <ScalarProperty Name="Iznos" ColumnName="Iznos" />
+          <ScalarProperty Name="CenovnikCenap" ColumnName="CenovnikCenap" />
+          <ScalarProperty Name="CenovnikProizvodKodpr" ColumnName="CenovnikProizvodKodpr" />
+          <ScalarProperty Name="RacunIdr" ColumnName="RacunIdr" />
+          <ScalarProperty Name="RacunKasaIdk" ColumnName="RacunKasaIdk" />
+          <ScalarProperty Name="RacunZaposleniSifzap" ColumnName="RacunZaposleniSifzap" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Gosts">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Gost)">
+        <MappingFragment StoreEntitySet="Gosts">
+          <ScalarProperty Name="Sifgos" ColumnName="Sifgos" />
+          <ScalarProperty Name="KonobarSifzap" ColumnName="KonobarSifzap" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Radis">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Radi)">
+        <MappingFragment StoreEntitySet="Radis">
+          <ScalarProperty Name="KonobarSifzap" ColumnName="KonobarSifzap" />
+          <ScalarProperty Name="SalaRedBrSale" ColumnName="SalaRedBrSale" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="RadiKonobar" TypeName="Model1.RadiKonobar" StoreEntitySet="Radis">
+      <EndProperty Name="Konobar">
+        <ScalarProperty Name="Sifzap" ColumnName="Konobar_Sifzap" />
+      </EndProperty>
+      <EndProperty Name="Radi">
+        <ScalarProperty Name="KonobarSifzap" ColumnName="KonobarSifzap" />
+        <ScalarProperty Name="SalaRedBrSale" ColumnName="SalaRedBrSale" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="56d8c7aa3fa34ae7a799f8b6c97ea223" Name="Diagram1" ZoomLevel="93" >
+        <EntityTypeShape EntityType="Model1.Kasa" Width="1.5" PointX="12.5" PointY="2" />
+        <EntityTypeShape EntityType="Model1.Racun" Width="1.5" PointX="12.25" PointY="6" />
+        <EntityTypeShape EntityType="Model1.Zaposleni" Width="1.5" PointX="8.25" PointY="3.25" />
+        <EntityTypeShape EntityType="Model1.Sala" Width="1.5" PointX="4.125" PointY="3.75" />
+        <EntityTypeShape EntityType="Model1.Proizvod" Width="1.5" PointX="5.375" PointY="1.875" />
+        <EntityTypeShape EntityType="Model1.Cenovnik" Width="1.5" PointX="2.375" PointY="1.875" />
+        <EntityTypeShape EntityType="Model1.Stavka" Width="1.5" PointX="2.25" PointY="6.625" />
+        <EntityTypeShape EntityType="Model1.Gost" Width="1.5" PointX="5.75" PointY="8.25" />
+        <EntityTypeShape EntityType="Model1.Radi" Width="1.5" PointX="4.625" PointY="6.25" />
+        <AssociationConnector Association="Model1.SalaRadi" />
+        <EntityTypeShape EntityType="Model1.Sanker" Width="1.5" PointX="9.875" PointY="6.375" />
+        <InheritanceConnector EntityType="Model1.Sanker" />
+        <EntityTypeShape EntityType="Model1.Konobar" Width="1.5" PointX="7.375" PointY="6.375" />
+        <InheritanceConnector EntityType="Model1.Konobar" />
+        <AssociationConnector Association="Model1.RadiKonobar" />
+        <AssociationConnector Association="Model1.KasaRacun" />
+        <AssociationConnector Association="Model1.ZaposleniRacun" />
+        <AssociationConnector Association="Model1.CenovnikProizvod" />
+        <AssociationConnector Association="Model1.CenovnikStavka" />
+        <AssociationConnector Association="Model1.RacunStavka" ManuallyRouted="true" >
+          <ConnectorPoint PointX="2.8227252265919818" PointY="9.5667936197916656" />
+          <ConnectorPoint PointX="2.8227252265919818" PointY="10.53082213255942" />
+          <ConnectorPoint PointX="13.010870212205619" PointY="10.53082213255942" />
+          <ConnectorPoint PointX="13.010870212205619" PointY="8.5571907552083317" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.KonobarGost" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

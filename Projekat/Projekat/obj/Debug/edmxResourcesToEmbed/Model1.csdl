@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Kasas" EntityType="Model1.Kasa" />
+    <EntitySet Name="Racuns" EntityType="Model1.Racun" />
+    <EntitySet Name="Zaposlenis" EntityType="Model1.Zaposleni" />
+    <EntitySet Name="Salas" EntityType="Model1.Sala" />
+    <EntitySet Name="Proizvods" EntityType="Model1.Proizvod" />
+    <EntitySet Name="Cenovniks" EntityType="Model1.Cenovnik" />
+    <EntitySet Name="Stavkas" EntityType="Model1.Stavka" />
+    <EntitySet Name="Gosts" EntityType="Model1.Gost" />
+    <EntitySet Name="Radis" EntityType="Model1.Radi" />
+    <AssociationSet Name="SalaRadi" Association="Model1.SalaRadi">
+      <End Role="Sala" EntitySet="Salas" />
+      <End Role="Radi" EntitySet="Radis" />
+    </AssociationSet>
+    <AssociationSet Name="RadiKonobar" Association="Model1.RadiKonobar">
+      <End Role="Radi" EntitySet="Radis" />
+      <End Role="Konobar" EntitySet="Zaposlenis" />
+    </AssociationSet>
+    <AssociationSet Name="KasaRacun" Association="Model1.KasaRacun">
+      <End Role="Kasa" EntitySet="Kasas" />
+      <End Role="Racun" EntitySet="Racuns" />
+    </AssociationSet>
+    <AssociationSet Name="ZaposleniRacun" Association="Model1.ZaposleniRacun">
+      <End Role="Zaposleni" EntitySet="Zaposlenis" />
+      <End Role="Racun" EntitySet="Racuns" />
+    </AssociationSet>
+    <AssociationSet Name="CenovnikProizvod" Association="Model1.CenovnikProizvod">
+      <End Role="Cenovnik" EntitySet="Cenovniks" />
+      <End Role="Proizvod" EntitySet="Proizvods" />
+    </AssociationSet>
+    <AssociationSet Name="CenovnikStavka" Association="Model1.CenovnikStavka">
+      <End Role="Cenovnik" EntitySet="Cenovniks" />
+      <End Role="Stavka" EntitySet="Stavkas" />
+    </AssociationSet>
+    <AssociationSet Name="RacunStavka" Association="Model1.RacunStavka">
+      <End Role="Stavka" EntitySet="Stavkas" />
+      <End Role="Racun" EntitySet="Racuns" />
+    </AssociationSet>
+    <AssociationSet Name="KonobarGost" Association="Model1.KonobarGost">
+      <End Role="Konobar" EntitySet="Zaposlenis" />
+      <End Role="Gost" EntitySet="Gosts" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Kasa">
+    <Key>
+      <PropertyRef Name="Idk" />
+    </Key>
+    <Property Name="Idk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Racuns" Relationship="Model1.KasaRacun" FromRole="Kasa" ToRole="Racun" />
+  </EntityType>
+  <EntityType Name="Racun">
+    <Key>
+      <PropertyRef Name="Idr" />
+      <PropertyRef Name="KasaIdk" />
+      <PropertyRef Name="ZaposleniSifzap" />
+    </Key>
+    <Property Name="Idr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Datumr" Type="String" Nullable="false" />
+    <Property Name="Ukupno" Type="String" Nullable="false" />
+    <NavigationProperty Name="Kasa" Relationship="Model1.KasaRacun" FromRole="Racun" ToRole="Kasa" />
+    <Property Name="KasaIdk" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Zaposleni" Relationship="Model1.ZaposleniRacun" FromRole="Racun" ToRole="Zaposleni" />
+    <Property Name="ZaposleniSifzap" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Stavkas" Relationship="Model1.RacunStavka" FromRole="Racun" ToRole="Stavka" />
+  </EntityType>
+  <EntityType Name="Zaposleni">
+    <Key>
+      <PropertyRef Name="Sifzap" />
+    </Key>
+    <Property Name="Sifzap" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ImeZap" Type="String" Nullable="false" />
+    <Property Name="PrzZap" Type="String" Nullable="false" />
+    <NavigationProperty Name="Racuns" Relationship="Model1.ZaposleniRacun" FromRole="Zaposleni" ToRole="Racun" />
+  </EntityType>
+  <EntityType Name="Sala">
+    <Key>
+      <PropertyRef Name="RedBrSale" />
+    </Key>
+    <Property Name="RedBrSale" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Sprat" Type="String" Nullable="false" />
+    <NavigationProperty Name="Radis" Relationship="Model1.SalaRadi" FromRole="Sala" ToRole="Radi" />
+  </EntityType>
+  <EntityType Name="Proizvod">
+    <Key>
+      <PropertyRef Name="Kodpr" />
+    </Key>
+    <Property Name="Kodpr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nazpr" Type="String" Nullable="false" />
+    <NavigationProperty Name="Cenovniks" Relationship="Model1.CenovnikProizvod" FromRole="Proizvod" ToRole="Cenovnik" />
+  </EntityType>
+  <EntityType Name="Cenovnik">
+    <Key>
+      <PropertyRef Name="Cenap" />
+      <PropertyRef Name="ProizvodKodpr" />
+    </Key>
+    <Property Name="Cenap" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Proizvod" Relationship="Model1.CenovnikProizvod" FromRole="Cenovnik" ToRole="Proizvod" />
+    <Property Name="ProizvodKodpr" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Stavkas" Relationship="Model1.CenovnikStavka" FromRole="Cenovnik" ToRole="Stavka" />
+  </EntityType>
+  <EntityType Name="Stavka">
+    <Key>
+      <PropertyRef Name="Rbst" />
+    </Key>
+    <Property Name="Rbst" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Kol" Type="String" Nullable="false" />
+    <Property Name="Iznos" Type="String" Nullable="false" />
+    <NavigationProperty Name="Cenovnik" Relationship="Model1.CenovnikStavka" FromRole="Stavka" ToRole="Cenovnik" />
+    <Property Name="CenovnikCenap" Type="Int32" Nullable="false" />
+    <Property Name="CenovnikProizvodKodpr" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Racun" Relationship="Model1.RacunStavka" FromRole="Stavka" ToRole="Racun" />
+    <Property Name="RacunIdr" Type="Int32" Nullable="false" />
+    <Property Name="RacunKasaIdk" Type="Int32" Nullable="false" />
+    <Property Name="RacunZaposleniSifzap" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Gost">
+    <Key>
+      <PropertyRef Name="Sifgos" />
+    </Key>
+    <Property Name="Sifgos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Konobar" Relationship="Model1.KonobarGost" FromRole="Gost" ToRole="Konobar" />
+    <Property Name="KonobarSifzap" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Radi">
+    <Key>
+      <PropertyRef Name="KonobarSifzap" />
+      <PropertyRef Name="SalaRedBrSale" />
+    </Key>
+    <Property Name="KonobarSifzap" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Sala" Relationship="Model1.SalaRadi" FromRole="Radi" ToRole="Sala" />
+    <Property Name="SalaRedBrSale" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Konobar" Relationship="Model1.RadiKonobar" FromRole="Radi" ToRole="Konobar" />
+  </EntityType>
+  <Association Name="SalaRadi">
+    <End Type="Model1.Sala" Role="Sala" Multiplicity="1" />
+    <End Type="Model1.Radi" Role="Radi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sala">
+        <PropertyRef Name="RedBrSale" />
+      </Principal>
+      <Dependent Role="Radi">
+        <PropertyRef Name="SalaRedBrSale" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Sanker" BaseType="Model1.Zaposleni" />
+  <EntityType Name="Konobar" BaseType="Model1.Zaposleni">
+    <NavigationProperty Name="Radis" Relationship="Model1.RadiKonobar" FromRole="Konobar" ToRole="Radi" />
+    <NavigationProperty Name="Gosts" Relationship="Model1.KonobarGost" FromRole="Konobar" ToRole="Gost" />
+  </EntityType>
+  <Association Name="RadiKonobar">
+    <End Type="Model1.Radi" Role="Radi" Multiplicity="*" />
+    <End Type="Model1.Konobar" Role="Konobar" Multiplicity="1" />
+  </Association>
+  <Association Name="KasaRacun">
+    <End Type="Model1.Kasa" Role="Kasa" Multiplicity="1" />
+    <End Type="Model1.Racun" Role="Racun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kasa">
+        <PropertyRef Name="Idk" />
+      </Principal>
+      <Dependent Role="Racun">
+        <PropertyRef Name="KasaIdk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ZaposleniRacun">
+    <End Type="Model1.Zaposleni" Role="Zaposleni" Multiplicity="1" />
+    <End Type="Model1.Racun" Role="Racun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Zaposleni">
+        <PropertyRef Name="Sifzap" />
+      </Principal>
+      <Dependent Role="Racun">
+        <PropertyRef Name="ZaposleniSifzap" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CenovnikProizvod">
+    <End Type="Model1.Cenovnik" Role="Cenovnik" Multiplicity="*" />
+    <End Type="Model1.Proizvod" Role="Proizvod" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Proizvod">
+        <PropertyRef Name="Kodpr" />
+      </Principal>
+      <Dependent Role="Cenovnik">
+        <PropertyRef Name="ProizvodKodpr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CenovnikStavka">
+    <End Type="Model1.Cenovnik" Role="Cenovnik" Multiplicity="1" />
+    <End Type="Model1.Stavka" Role="Stavka" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cenovnik">
+        <PropertyRef Name="Cenap" />
+        <PropertyRef Name="ProizvodKodpr" />
+      </Principal>
+      <Dependent Role="Stavka">
+        <PropertyRef Name="CenovnikCenap" />
+        <PropertyRef Name="CenovnikProizvodKodpr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RacunStavka">
+    <End Type="Model1.Stavka" Role="Stavka" Multiplicity="*" />
+    <End Type="Model1.Racun" Role="Racun" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Racun">
+        <PropertyRef Name="Idr" />
+        <PropertyRef Name="KasaIdk" />
+        <PropertyRef Name="ZaposleniSifzap" />
+      </Principal>
+      <Dependent Role="Stavka">
+        <PropertyRef Name="RacunIdr" />
+        <PropertyRef Name="RacunKasaIdk" />
+        <PropertyRef Name="RacunZaposleniSifzap" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="KonobarGost">
+    <End Type="Model1.Konobar" Role="Konobar" Multiplicity="1" />
+    <End Type="Model1.Gost" Role="Gost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Konobar">
+        <PropertyRef Name="Sifzap" />
+      </Principal>
+      <Dependent Role="Gost">
+        <PropertyRef Name="KonobarSifzap" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
